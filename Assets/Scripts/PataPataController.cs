@@ -118,14 +118,15 @@ public class PataPataController : MonoBehaviour
         bool check2= checkPosition.y >= 0 && checkPosition.y < width;
         return ( check1==true && check2==true);
     }
-
+    private Vector2Int[] HintVectors=new Vector2Int[0];
     public void CreateMondai()
     {
-    
+        HintVectors = new Vector2Int[tekazu];
         //this.tekazu = tekazu;
         for (int i = 0; i < tekazu; i++)
         {
             Vector2Int changePosition = new Vector2Int(UnityEngine.Random.Range(0, width), UnityEngine.Random.Range(0, width));
+            HintVectors[i] = changePosition;
             ClickPanel(changePosition, -1);
         }
         //問題つくったときのボードの状態を保存
@@ -214,5 +215,13 @@ public class PataPataController : MonoBehaviour
         SetBoard(width, max_color);
        // InitPanel();
         CreateMondai();
+    }
+    [SerializeField]
+    private HintViewer hint; 
+    public void ClickHint()
+    {
+        if (HintVectors.Length <= 0) return;
+        int index = UnityEngine.Random.Range(0, tekazu);
+        hint.HintView(HintVectors[index]);
     }
 }

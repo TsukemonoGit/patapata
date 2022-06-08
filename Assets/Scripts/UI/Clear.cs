@@ -9,6 +9,8 @@ public class Clear : MonoBehaviour
     private int length;
     private int nowLength;
     int maxVisibleCharacters;
+    [SerializeField]
+    MenuController menu;
     private void Start()
     {
         clearText = GetComponent<TMP_Text>();
@@ -31,7 +33,8 @@ public class Clear : MonoBehaviour
             clearText.maxVisibleCharacters = nowLength;
             yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         this.gameObject.SetActive(false);
+        menu.MenuButtonClick();
     }
 }
